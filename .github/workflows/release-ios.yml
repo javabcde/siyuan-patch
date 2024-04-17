@@ -54,7 +54,7 @@ jobs:
           node-version: 18
 
       - name: Install Node pnpm
-        run: npm install -g pnpm
+        run: npm install -g pnpm@v8.14.1
         working-directory: ${{ github.workspace }}/siyuan-note/siyuan/app
 
       - name: Install Node Dependencies
