@@ -1,12 +1,11 @@
-diff --git a/app/build.gradle b/app/build.gradle
-index c1e9632..e526009 100644
---- a/app/build.gradle
-+++ b/app/build.gradle
-@@ -3,6 +3,16 @@ plugins {
+diff --git forkSrcPrefix/app/build.gradle forkDstPrefix/app/build.gradle
+index d75faa03e075e7bbfdc87f8d0ce39eedcf79db44..3d3f54eb1fa12a7968a78df459eed94b9d651965 100644
+--- forkSrcPrefix/app/build.gradle
++++ forkDstPrefix/app/build.gradle
+@@ -3,6 +3,15 @@ plugins {
  }
  
  android {
-+
 +    signingConfigs {
 +        debug {
 +            storeFile = file("../keystore/debug.jks")
@@ -19,7 +18,7 @@ index c1e9632..e526009 100644
      compileSdkVersion 34
      buildToolsVersion "34"
  
-@@ -20,6 +30,14 @@ android {
+@@ -20,6 +29,14 @@ android {
              shrinkResources true
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
          }
