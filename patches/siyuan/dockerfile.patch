@@ -1,0 +1,13 @@
+diff --git a/Dockerfile b/Dockerfile
+index 7e0428881..ed6bd2e5d 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,7 +1,7 @@
+ FROM node:21 as NODE_BUILD
+ WORKDIR /go/src/github.com/siyuan-note/siyuan/
+ ADD . /go/src/github.com/siyuan-note/siyuan/
+-RUN cd app && npm install -g pnpm && pnpm install && pnpm run build
++RUN cd app && npm install -g pnpm@@v8.14.1 && pnpm install && pnpm run build
+ 
+ FROM golang:alpine as GO_BUILD
+ WORKDIR /go/src/github.com/siyuan-note/siyuan/
