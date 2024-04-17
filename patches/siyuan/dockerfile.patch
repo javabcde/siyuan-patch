@@ -7,7 +7,7 @@ index 7e0428881..ed6bd2e5d 100644
  WORKDIR /go/src/github.com/siyuan-note/siyuan/
  ADD . /go/src/github.com/siyuan-note/siyuan/
 -RUN cd app && npm install -g pnpm && pnpm install && pnpm run build
-+RUN cd app && npm install -g pnpm@@v8.14.1 && pnpm install && pnpm run build
++RUN cd app && npm install -g pnpm@v8.14.1 && pnpm install && pnpm run build
  
  FROM golang:alpine as GO_BUILD
  WORKDIR /go/src/github.com/siyuan-note/siyuan/
