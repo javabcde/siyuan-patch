@@ -39,7 +39,7 @@ jobs:
           git clone --branch v${{ github.event.inputs.version }} --depth=1 https://github.com/siyuan-note/siyuan-android.git
           cd siyuan-android
 
-          git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/debug-build.patch
+          git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/debug-build.patch -v
 
           mkdir -p app/src/main/assets/
           mkdir -p app/libs/
