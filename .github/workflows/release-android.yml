@@ -107,6 +107,8 @@ jobs:
         run: |
           chmod 777 ./gradlew
           ./gradlew :app:assembleDebug
+          
+          ls ${{ github.workspace }}/siyuan-note/siyuan-android/app/build/outputs/apk/debug
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
 
