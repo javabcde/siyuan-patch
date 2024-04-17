@@ -1,8 +1,17 @@
 diff --git a/app/build.gradle b/app/build.gradle
-index 50877c1..933a959 100644
+index 50877c1..7613808 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
-@@ -20,6 +20,16 @@ android.applicationVariants.configureEach { variant ->
+@@ -12,14 +12,23 @@ android.applicationVariants.configureEach { variant ->
+         def buildType = variant.buildType.name
+         def newApkName = "siyuan-${versionName}.apk"
+         if (buildType != "release") {
+-            def formattedDate = new Date().format('yyyyMMddHHmmss')
+-            newApkName = "siyuan-${versionName}-${buildType}-${formattedDate}.apk"
++            newApkName = "app-debug.apk"
+         }
+         output.outputFileName = newApkName
+     }
  }
  
  android {
@@ -19,7 +28,7 @@ index 50877c1..933a959 100644
      compileSdkVersion 34
      buildToolsVersion "34"
  
-@@ -39,12 +49,21 @@ android {
+@@ -39,12 +48,21 @@ android {
              resValue "string", "app_package_name", "org.b3log.siyuan"
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
          }
@@ -35,8 +44,8 @@ index 50877c1..933a959 100644
 +            applicationIdSuffix ".debug"
 +            minifyEnabled true
 +            shrinkResources true
-+            resValue "string", "app_name", "SiYuan-Debug"
-+            resValue "string", "app_package_name", "org.b3log.siyuan.debug"
++            resValue "string", "app_name", "SiYuan"
++            resValue "string", "app_package_name", "org.b3log.siyuan"
 +            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 +            signingConfig signingConfigs.debug
          }
