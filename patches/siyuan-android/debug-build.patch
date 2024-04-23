@@ -1,5 +1,5 @@
 diff --git a/app/build.gradle b/app/build.gradle
-index 3a62b3e..96012f3 100644
+index 3a62b3e..d3316a0 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
 @@ -4,7 +4,7 @@ plugins {
@@ -17,7 +17,7 @@ index 3a62b3e..96012f3 100644
          if (buildType != "release") {
 -            def formattedDate = new Date().format('yyyyMMddHHmmss')
 -            project.setProperty("archivesBaseName", "siyuan-${versionName}-${buildType}-${formattedDate}")
-+            newApkName = "app-debug.apk"
++            //newApkName = "app-debug.apk"
 +            project.setProperty("archivesBaseName", "app-debug")
          }
      }
@@ -38,7 +38,7 @@ index 3a62b3e..96012f3 100644
      namespace 'org.b3log.siyuan'
      compileSdk 34
  
-@@ -44,21 +55,30 @@ android {
+@@ -44,7 +55,7 @@ android {
      buildTypes {
          release {
              // 正式版打包时指定签名证书
@@ -47,9 +47,7 @@ index 3a62b3e..96012f3 100644
  
              minifyEnabled true
              shrinkResources true
-             // 此处优先级太高，渠道处配置 resValue 不会生效，故放到了 productFlavors 多渠道打包处处理
--            // resValue "string", "app_name", "SiYuan"
-+            resValue "string", "app_name", "SiYuan"
+@@ -53,12 +64,21 @@ android {
              resValue "string", "app_package_name", "org.b3log.siyuan"
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
          }
