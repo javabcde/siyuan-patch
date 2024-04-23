@@ -1,17 +1,11 @@
 diff --git a/buildRelease.gradle b/buildRelease.gradle
-index d6cb0fe..c4df1b1 100644
+index d6cb0fe..5f6a513 100644
 --- a/buildRelease.gradle
 +++ b/buildRelease.gradle
-@@ -1,4 +1,4 @@
--tasks.register('buildReleaseTask', Copy) {
-+tasks.register('assembleOfficialDebug', Copy) {
-   group = 'build'
-   description = 'Building release version ${rootProject.siyuanVersionName}'
- 
 @@ -35,5 +35,5 @@ tasks.register('buildReleaseTask', Copy) {
    }
  
    // 依赖于构建任务
 -  dependsOn 'assembleXiaomiRelease', 'assembleVoRelease', 'bundleGoogleplayRelease', 'bundleHuaweiRelease', 'assembleOfficialRelease'
-+  dependsOn 'assembleDebug'
++  dependsOn 'assembleOfficialDebug'
  }
