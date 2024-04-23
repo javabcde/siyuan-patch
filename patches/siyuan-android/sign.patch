@@ -1,5 +1,5 @@
 diff --git a/signings.templates.gradle b/signings.templates.gradle
-index d3e168c..643b9fb 100644
+index d3e168c..cc6e627 100644
 --- a/signings.templates.gradle
 +++ b/signings.templates.gradle
 @@ -2,12 +2,10 @@ android {
@@ -12,7 +12,7 @@ index d3e168c..643b9fb 100644
 -      storePassword "android"      // 密码
 -      keyAlias "androiddebugkey"   // Alias
 -      keyPassword "android"        // Alias 密码
-+      storeFile = file("../keystore/debug.jks")
++      storeFile file("../keystore/debug.jks")
 +      storePassword System.getenv("KEYSTORE_PASSWORD")
 +      keyAlias "debug"
 +      keyPassword System.getenv("KEYSTORE_PASSWORD")
