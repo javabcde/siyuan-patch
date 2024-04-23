@@ -109,7 +109,7 @@ jobs:
           chmod 777 ./gradlew
           ./gradlew clean buildReleaseTask
           
-          ls ${{ github.workspace }}/siyuan-note/siyuan-android/app/build-release/siyuan-${versionName}-all
+          ls ${{ github.workspace }}/siyuan-note/siyuan-android/app/build-release/siyuan-all
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
 
