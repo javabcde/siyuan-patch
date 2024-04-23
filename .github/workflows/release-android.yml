@@ -41,7 +41,6 @@ jobs:
 
           git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/debug-build.patch
           git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/buildrelease.patch
-          git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/sign.patch
 
           mkdir -p app/src/main/assets/
           mkdir -p app/libs/

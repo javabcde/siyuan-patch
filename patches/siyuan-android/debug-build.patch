@@ -1,19 +1,17 @@
 diff --git a/app/build.gradle b/app/build.gradle
-index 3a62b3e..a228043 100644
+index 3a62b3e..1837427 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
-@@ -2,10 +2,6 @@ plugins {
-     id 'com.android.application'
- }
+@@ -4,7 +4,7 @@ plugins {
  
--// 多渠道打包配置已引用的方式传递
--apply from: rootProject.file('flavors.gradle')
+ // 多渠道打包配置已引用的方式传递
+ apply from: rootProject.file('flavors.gradle')
 -apply from: rootProject.file('signings.gradle')
--apply from: rootProject.file('buildRelease.gradle')
++//apply from: rootProject.file('signings.templates.gradle')
+ apply from: rootProject.file('buildRelease.gradle')
  
  // By appending the version name, build type, and a timestamp to the APK filename,
- // it becomes very easy for testers and developers to identify exactly which version of the application they are testing.
-@@ -23,20 +19,34 @@ android.applicationVariants.configureEach { variant ->
+@@ -23,13 +23,24 @@ android.applicationVariants.configureEach { variant ->
  
          // 根据构建类型调整文件名
          if (buildType != "release") {
@@ -36,21 +34,11 @@ index 3a62b3e..a228043 100644
 +        }
 +    }
 +
++
      namespace 'org.b3log.siyuan'
      compileSdk 34
-+    compileSdkVersion 34
-+    buildToolsVersion "34"
  
-     defaultConfig {
-         applicationId "org.b3log.siyuan"
-         minSdk 24
-         targetSdk 34
-+        minSdkVersion 24
-+        targetSdkVersion 34
-         versionCode siyuanVersionCode
-         versionName siyuanVersionName
-     }
-@@ -53,12 +63,21 @@ android {
+@@ -53,12 +64,21 @@ android {
              resValue "string", "app_package_name", "org.b3log.siyuan"
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
          }
