@@ -107,7 +107,7 @@ jobs:
         working-directory: ${{ github.workspace }}/siyuan-note/siyuan-android
         run: |
           chmod 777 ./gradlew
-          ./gradlew clean assembleOfficialDebug -PbuildType=debug
+          ./gradlew clean :app:assembleDebug
           
           ls ${{ github.workspace }}/siyuan-note/siyuan-android/app/build/outputs/apk/debug
         env:
