@@ -40,6 +40,8 @@ jobs:
           cd siyuan-android
 
           git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/debug-build.patch
+          git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/buildrelease.patch
+          git apply ${{ github.workspace }}/siyuan-note/patches/siyuan-android/sign.patch
 
           mkdir -p app/src/main/assets/
           mkdir -p app/libs/
@@ -106,7 +108,7 @@ jobs:
         working-directory: ${{ github.workspace }}/siyuan-note/siyuan-android
         run: |
           chmod 777 ./gradlew
-          ./gradlew :app:assembleDebug
+          ./gradlew clean buildReleaseTask
           
           ls ${{ github.workspace }}/siyuan-note/siyuan-android/app/build/outputs/apk/debug
         env:
