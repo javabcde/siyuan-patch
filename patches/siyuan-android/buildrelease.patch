@@ -1,5 +1,5 @@
 diff --git a/buildRelease.gradle b/buildRelease.gradle
-index d6cb0fe..1575b59 100644
+index d6cb0fe..5260a59 100644
 --- a/buildRelease.gradle
 +++ b/buildRelease.gradle
 @@ -3,7 +3,7 @@ tasks.register('buildReleaseTask', Copy) {
@@ -16,5 +16,5 @@ index d6cb0fe..1575b59 100644
  
    // 依赖于构建任务
 -  dependsOn 'assembleXiaomiRelease', 'assembleVoRelease', 'bundleGoogleplayRelease', 'bundleHuaweiRelease', 'assembleOfficialRelease'
-+  dependsOn 'assembleOfficialDebug','assembleXiaomiDebug'
++  dependsOn 'assembleOfficialDebug'
  }
