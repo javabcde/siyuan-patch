@@ -1,5 +1,5 @@
 diff --git a/app/build.gradle b/app/build.gradle
-index 3a62b3e..7661173 100644
+index 3a62b3e..53f1666 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
 @@ -4,7 +4,7 @@ plugins {
@@ -11,7 +11,20 @@ index 3a62b3e..7661173 100644
  apply from: rootProject.file('buildRelease.gradle')
  
  // By appending the version name, build type, and a timestamp to the APK filename,
-@@ -23,13 +23,23 @@ android.applicationVariants.configureEach { variant ->
+@@ -13,23 +13,33 @@ apply from: rootProject.file('buildRelease.gradle')
+ // Testers don’t need to manually rename APKs to keep track of different builds or worry about which version is the latest.
+ android.applicationVariants.configureEach { variant ->
+     variant.outputs.configureEach { output ->
+-        def versionName = variant.versionName
++        //def versionName = variant.versionName
+         def buildType = variant.buildType.name
+-        def flavorName = variant.flavorName
++        //def flavorName = variant.flavorName
+ 
+         // Set the archivesBaseName property
+         // https://stackoverflow.com/questions/52508720/how-to-change-the-generated-filename-for-app-bundles-with-gradle
+-        project.setProperty("archivesBaseName", "siyuan-${versionName}")
++        project.setProperty("archivesBaseName", "siyuan-app-debug")
  
          // 根据构建类型调整文件名
          if (buildType != "release") {
@@ -37,7 +50,7 @@ index 3a62b3e..7661173 100644
      namespace 'org.b3log.siyuan'
      compileSdk 34
  
-@@ -38,7 +48,7 @@ android {
+@@ -38,13 +48,13 @@ android {
          minSdk 24
          targetSdk 34
          versionCode siyuanVersionCode
@@ -46,6 +59,13 @@ index 3a62b3e..7661173 100644
      }
  
      buildTypes {
+         release {
+             // 正式版打包时指定签名证书
+-            signingConfig signingConfigs.siyuanConfig
++            signingConfig signingConfigs.debug
+ 
+             minifyEnabled true
+             shrinkResources true
 @@ -53,12 +63,21 @@ android {
              resValue "string", "app_package_name", "org.b3log.siyuan"
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
