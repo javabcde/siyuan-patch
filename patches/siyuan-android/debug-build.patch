@@ -1,5 +1,5 @@
 diff --git a/app/build.gradle b/app/build.gradle
-index 3a62b3e..8728b3e 100644
+index 3a62b3e..60dbf22 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
 @@ -4,7 +4,7 @@ plugins {
@@ -7,37 +7,23 @@ index 3a62b3e..8728b3e 100644
  // 多渠道打包配置已引用的方式传递
  apply from: rootProject.file('flavors.gradle')
 -apply from: rootProject.file('signings.gradle')
-+//apply from: rootProject.file('signings.templates.gradle')
++//apply from: rootProject.file('signings.gradle')
  apply from: rootProject.file('buildRelease.gradle')
  
  // By appending the version name, build type, and a timestamp to the APK filename,
-@@ -13,23 +13,33 @@ apply from: rootProject.file('buildRelease.gradle')
- // Testers don’t need to manually rename APKs to keep track of different builds or worry about which version is the latest.
- android.applicationVariants.configureEach { variant ->
-     variant.outputs.configureEach { output ->
--        def versionName = variant.versionName
-+        //def versionName = variant.versionName
-         def buildType = variant.buildType.name
--        def flavorName = variant.flavorName
-+        //def flavorName = variant.flavorName
- 
-         // Set the archivesBaseName property
-         // https://stackoverflow.com/questions/52508720/how-to-change-the-generated-filename-for-app-bundles-with-gradle
--        project.setProperty("archivesBaseName", "siyuan-${versionName}")
-+        project.setProperty("archivesBaseName", "siyuan")
- 
-         // 根据构建类型调整文件名
-         if (buildType != "release") {
--            def formattedDate = new Date().format('yyyyMMddHHmmss')
--            project.setProperty("archivesBaseName", "siyuan-${versionName}-${buildType}-${formattedDate}")
-+            project.setProperty("archivesBaseName", "app-debug")
-         }
-     }
+@@ -30,6 +30,24 @@ android.applicationVariants.configureEach { variant ->
  }
  
  android {
 +
 +    signingConfigs {
++        siyuanConfig {
++            storeFile file("../keystore/debug.jks")
++            storePassword "android"
++            keyAlias "androiddebugkey"
++            keyPassword "android"
++        }
++
 +        debug {
 +            storeFile = file("../keystore/debug.jks")
 +            storePassword System.getenv("KEYSTORE_PASSWORD")
@@ -50,42 +36,15 @@ index 3a62b3e..8728b3e 100644
      namespace 'org.b3log.siyuan'
      compileSdk 34
  
-@@ -38,13 +48,13 @@ android {
-         minSdk 24
-         targetSdk 34
-         versionCode siyuanVersionCode
--        versionName siyuanVersionName
-+        //versionName siyuanVersionName
-     }
- 
-     buildTypes {
-         release {
-             // 正式版打包时指定签名证书
--            signingConfig signingConfigs.siyuanConfig
-+            signingConfig signingConfigs.debug
- 
-             minifyEnabled true
-             shrinkResources true
-@@ -53,12 +63,21 @@ android {
-             resValue "string", "app_package_name", "org.b3log.siyuan"
+@@ -54,9 +72,10 @@ android {
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
          }
--        debug {
-+/*        debug {
+         debug {
++            signingConfig signingConfigs.debug
              applicationIdSuffix ".debug"
              minifyEnabled false
-             resValue "string", "app_name", "SiYuan-Debug"
+-            resValue "string", "app_name", "SiYuan-Debug"
++            resValue "string", "app_name", "SiYuan"
              resValue "string", "app_package_name", "org.b3log.siyuan.debug"
              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-+        }*/
-+        debug {
-+            applicationIdSuffix ".debug"
-+            minifyEnabled true
-+            shrinkResources true
-+            resValue "string", "app_name", "SiYuan"
-+            resValue "string", "app_package_name", "org.b3log.siyuan"
-+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-+            signingConfig signingConfigs.debug
          }
-     }
- 
