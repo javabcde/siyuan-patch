@@ -1,0 +1,53 @@
+name: sync-upstream
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync upstream patches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream https://github.com/demoshang/siyuan-patch.git || true
+          git fetch upstream --tags
+
+          CHANGED=false
+
+          git checkout -B temp-sync main
+          if git merge --allow-unrelated-histories -X theirs upstream/main --no-commit --no-ff; then
+            # 保护本地 workflows（用户可能有自定义配置如 DOCKER_HUB_USER 等）
+            if [ -d ".github/workflows" ]; then
+              git checkout HEAD -- .github/workflows/
+              git clean -fd .github/workflows/
+              git diff --cached --name-only .github/workflows/ | xargs -r git rm --cached --
+            fi
+            if git commit -m "Auto sync from upstream"; then
+              git push origin temp-sync:main
+              CHANGED=true
+              echo "✅ Patches synced from demoshang/siyuan-patch."
+            else
+              echo "✅ No upstream changes."
+            fi
+          fi
+          git checkout main
+          git branch -D temp-sync || true
+
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
